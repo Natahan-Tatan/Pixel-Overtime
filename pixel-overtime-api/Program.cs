@@ -30,10 +30,12 @@
 //   If you wish to use this software for commercial or professional purposes, please contact the author to discuss licensing options.
 
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
 using pixel_overtime_api.Database.Models;
 using pixel_overtime_api.Extensions;
 
@@ -102,7 +104,8 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"pixel-overtime-models.xml"));
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddDbContext<pixel_overtime_api.Database.ApiDbContext>(opt => {
     opt.UseSqlite("Data Source=../datas/overpixel.db;");
