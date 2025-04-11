@@ -27,6 +27,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthorization();
 
 builder.Services.AddIdentityApiEndpoints<pixel_overtime_api.Database.Models.User>(opt => {
+
+        //TODO: make issuer taken from settings
         opt.Tokens.AuthenticatorIssuer = "PixelOvertime_debug_1456";
     })
     .AddEntityFrameworkStores<pixel_overtime_api.Database.ApiDbContext>();
