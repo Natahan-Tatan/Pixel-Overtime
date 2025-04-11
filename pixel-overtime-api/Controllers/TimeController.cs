@@ -34,6 +34,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using pixel_overtime_api.Database;
 using pixel_overtime_api.Database.Models;
 using pixel_overtime_models.Time;
@@ -80,7 +81,7 @@ namespace pixel_overtime_api.Controllers
 
             await _dbContext.SaveChangesAsync();
 
-            return NoContent();
+            return Created();
         }
 
         [HttpGet]
@@ -123,6 +124,93 @@ namespace pixel_overtime_api.Controllers
                     Date = t.Date
                 })
             );
+        }
+
+        [HttpGet]
+        [Route("/Time/{id}")]
+        public async Task<IActionResult> Single([FromRoute]string id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user is null)
+            {
+                return Unauthorized();
+            }
+
+            // We consider the attempt to access to a not owned time as a not found error to avoid ID leak
+            var time = await _dbContext.Times.FirstOrDefaultAsync(t => t.Id == id && t.UserId == user.Id);
+
+            if(time is null)
+            {
+                return NotFound("Time not found");
+            }
+
+            return new ObjectResult(new pixel_overtime_models.Time.AllInfos(){
+                Id = time.Id,
+                UserId = time.UserId,
+                TimeType = time.TimeType,
+                TimeReason = time.TimeReason,
+                DurationMinutes = time.DurationMinutes,
+                Description = time.Description,
+                CreateAt = time.CreateAt,
+                Date = time.Date
+            });
+        }
+
+        [HttpDelete]
+        [Route("/Time/{id}")]
+        public async Task<IActionResult> Delete([FromRoute]string id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user is null)
+            {
+                return Unauthorized();
+            }
+
+            // We consider the attempt to access to a not owned time as a not found error to avoid ID leak
+            var time = await _dbContext.Times.FirstOrDefaultAsync(t => t.Id == id && t.UserId == user.Id);
+
+            if(time is null)
+            {
+                return NotFound("Time not found");
+            }
+
+            _dbContext.Times.Remove(time);
+
+             await _dbContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPatch]
+        [Route("/Time/{id}")]
+        public async Task<IActionResult> UpdateInfos([FromRoute]string id, [FromBody] pixel_overtime_models.Time.UpdateInfos infos)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user is null)
+            {
+                return Unauthorized();
+            }
+
+            // We consider the attempt to access to a not owned time as a not found error to avoid ID leak
+            var time = await _dbContext.Times.FirstOrDefaultAsync(t => t.Id == id && t.UserId == user.Id);
+
+            if(time is null)
+            {
+                return NotFound("Time not found");
+            }
+
+            time.Date = infos.Date;
+            time.TimeReason = infos.TimeReason;
+            time.TimeType = infos.TimeType;
+            time.Description = infos.Description;
+            time.DurationMinutes = infos.DurationMinutes;
+
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
