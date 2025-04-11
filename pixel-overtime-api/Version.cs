@@ -16,11 +16,16 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using Microsoft.AspNetCore.Identity;
+using System;
 
-namespace pixel_overtime_api.Database.Models;
+namespace pixel_overtime_api;
 
-public class User: IdentityUser
+public static class Version
 {
+    public const int Major = 0;
+    public const int Minor = 0;
+    public const int Patch = 0;
+    public const string Dev = "";
 
+    public static string AsString() => $"{Major}-{Minor}-{Patch}{(!string.IsNullOrWhiteSpace(Dev)?$"-{Dev}":"")}";
 }
