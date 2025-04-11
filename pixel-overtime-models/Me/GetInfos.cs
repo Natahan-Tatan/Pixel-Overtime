@@ -29,12 +29,42 @@
 //   
 //   If you wish to use this software for commercial or professional purposes, please contact the author to discuss licensing options.
 
-using Microsoft.AspNetCore.Identity;
+using System;
 
-namespace pixel_overtime_api.Database.Models;
+namespace pixel_overtime_models.Me;
 
-public class User: IdentityUser
+/// <summary>
+/// Classe used by MeController to send infos to user about itself
+/// </summary>
+public class GetInfos
 {
+    /// <summary>
+    /// Id of the user
+    /// </summary>
+    /// <example>647d-d392-4434-a8da-2303e</example>
+    public string Id {get;set;} = "";
+
+    /// <summary>
+    /// Email of the user
+    /// </summary>
+    /// <example>example@example.com</example>
+    public string Email {get;set;} = "";
+
+    /// <summary>
+    /// Is email confirmed
+    /// </summary>
+    /// <example>true</example>
+    public bool EmailConfirmed {get;set;} = false;
+
+    /// <summary>
+    /// Displayed name of the user
+    /// </summary>
+    /// <example>René Buisson</example>
     public string Name {get;set;} = "";
-    public DateTime AccountCreatedAt {get;set;} = DateTime.UtcNow;
+
+    /// <summary>
+    /// Creation date of the account
+    /// </summary>
+    /// <example>2025-04-11T13:44:31.393Z</example>
+    public DateTime AccountCreatedAt {get;set;}
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OverTimer", "godot\OverTime
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pixel-overtime-api", "pixel-overtime-api\pixel-overtime-api.csproj", "{3F05E2FA-969F-43B1-924B-88456B0AD5C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pixel-overtime-models", "pixel-overtime-models\pixel-overtime-models.csproj", "{FE723FF1-9F90-4A8C-8F64-E067049EF72B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{3F05E2FA-969F-43B1-924B-88456B0AD5C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F05E2FA-969F-43B1-924B-88456B0AD5C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F05E2FA-969F-43B1-924B-88456B0AD5C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE723FF1-9F90-4A8C-8F64-E067049EF72B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE723FF1-9F90-4A8C-8F64-E067049EF72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE723FF1-9F90-4A8C-8F64-E067049EF72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE723FF1-9F90-4A8C-8F64-E067049EF72B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
