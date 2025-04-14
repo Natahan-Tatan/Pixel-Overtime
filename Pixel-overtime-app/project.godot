@@ -10,16 +10,13 @@ config_version=5
 
 [application]
 
-config/name="OverTimer"
-config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+config/name="pixel-overtime-app"
+config/version="0.1.0"
+run/main_scene="uid://6s82ayjfyggk"
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
-
-[dotnet]
-
-project/assembly_name="OverTimer"
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-textures/vram_compression/import_etc2_astc=true

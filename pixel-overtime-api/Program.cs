@@ -31,6 +31,7 @@
 
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,15 @@ using pixel_overtime_api.Database.Models;
 using pixel_overtime_api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddW3CLogging(logging =>
+{
+    logging.FileSizeLimit = 10 * 1024 * 1024;
+    logging.RetainedFileCountLimit = 5;
+    logging.FileName = "pixel_overtime_api-access-";
+    logging.LogDirectory = "logs/";
+    logging.FlushInterval = TimeSpan.FromSeconds(1);
+});
 
 builder.Services.AddAuthorization();
 
@@ -112,6 +122,8 @@ builder.Services.AddDbContext<pixel_overtime_api.Database.ApiDbContext>(opt => {
 });
 
 var app = builder.Build();
+
+app.UseW3CLogging();
 
 //app.MapIdentityApi<pixel_overtime_api.Database.Models.User>();
 app.MapCustomIdentityApi<pixel_overtime_api.Database.Models.User>();

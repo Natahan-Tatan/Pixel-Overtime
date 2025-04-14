@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://6s82ayjfyggk"]
+
+[ext_resource type="Script" uid="uid://dnl3xeutxgkqf" path="res://Singletons/WebService/web_service.gd" id="1_tua53"]
+[ext_resource type="Script" uid="uid://btwuf7hhq0ipp" path="res://Singletons/WebService/route.gd" id="2_emypa"]
+
+[sub_resource type="Resource" id="Resource_m2iw7"]
+script = ExtResource("2_emypa")
+method = 2
+route = "/register"
+metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
+
+[sub_resource type="Resource" id="Resource_y2q0x"]
+script = ExtResource("2_emypa")
+method = 2
+route = "/login"
+metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
+
+[sub_resource type="Resource" id="Resource_hei7v"]
+script = ExtResource("2_emypa")
+method = 2
+route = "/refresh"
+metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
+
+[sub_resource type="Resource" id="Resource_emypa"]
+script = ExtResource("2_emypa")
+method = 2
+route = "/logout"
+metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
+
+[sub_resource type="Resource" id="Resource_q6tvd"]
+script = ExtResource("2_emypa")
+method = 0
+route = "/me"
+metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
+
+[sub_resource type="Resource" id="Resource_oeuvy"]
+script = ExtResource("2_emypa")
+method = 8
+route = "/me"
+metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
+
+[node name="WebService" type="Node"]
+script = ExtResource("1_tua53")
+instance_host = "http://localhost:5142"
+route_register = SubResource("Resource_m2iw7")
+route_login = SubResource("Resource_y2q0x")
+route_refresh = SubResource("Resource_hei7v")
+route_logout = SubResource("Resource_emypa")
+route_get_user_infos = SubResource("Resource_q6tvd")
+route_set_user_infos = SubResource("Resource_oeuvy")
+
+[connection signal="api_error" from="." to="." method="_on_api_error"]
