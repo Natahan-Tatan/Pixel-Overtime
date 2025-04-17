@@ -42,8 +42,6 @@ signal api_error(title: String, message: String)
 func _ready() -> void:
 	_load_user()
 
-	self.login("nathan@test.fr", "Azerty1234&") #FIXME: Remove this
-
 func _load_user():
 	if FileAccess.file_exists(USER_SAVE_FILE):
 		user = load(USER_SAVE_FILE)

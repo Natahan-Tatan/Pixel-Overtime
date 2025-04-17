@@ -21,3 +21,10 @@ obj/
 
 /datas/
 logs/
+
+# Godot app exports
+/Pixel-overtime-app/Exports/Web/*
+/Pixel-overtime-app/Exports/Linux/*
+/Pixel-overtime-app/Exports/Windows/*
+/Pixel-overtime-app/Exports/Macos/*
+/Pixel-overtime-app/Exports/Android/*

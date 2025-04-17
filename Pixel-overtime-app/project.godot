@@ -10,13 +10,34 @@ config_version=5
 
 [application]
 
-config/name="pixel-overtime-app"
+config/name="Fl'overtime"
 config/version="0.1.0"
-run/main_scene="uid://6s82ayjfyggk"
+run/main_scene="uid://bi8w3ptbjfcnk"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/stretch/aspect="ignore"
+window/handheld/orientation=6
+
+[dotnet]
+
+project/assembly_name="pixel-overtime-app"
+
+[gui]
+
+theme/custom="uid://6xodd4q0doio"
+
+[physics]
+
+2d/physics_engine="Dummy"
+3d/physics_engine="Dummy"
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

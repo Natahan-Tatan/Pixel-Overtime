@@ -1,0 +1,16 @@
+[gd_resource type="AnimatedTexture" load_steps=4 format=3 uid="uid://csq7xbu7q1xpe"]
+
+[ext_resource type="Texture2D" uid="uid://ub5j0x4h3kjg" path="res://FlovertimeTheme/Widgets/LineEdit/line_edit1.png" id="1_d5luv"]
+[ext_resource type="Texture2D" uid="uid://dpolsqyrxf1bs" path="res://FlovertimeTheme/Widgets/LineEdit/line_edit2.png" id="2_mkctk"]
+[ext_resource type="Texture2D" uid="uid://bwyhrlbxcj7wr" path="res://FlovertimeTheme/Widgets/LineEdit/line_edit3.png" id="3_2jjya"]
+
+[resource]
+frames = 4
+frame_0/texture = ExtResource("1_d5luv")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("2_mkctk")
+frame_1/duration = 0.5
+frame_2/texture = ExtResource("3_2jjya")
+frame_2/duration = 0.5
+frame_3/texture = ExtResource("2_mkctk")
+frame_3/duration = 0.5
