@@ -1,0 +1,10 @@
+[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://dc7y26vw7esr0"]
+
+[ext_resource type="Texture2D" uid="uid://wrihegut5vy0" path="res://FlovertimeTheme/Widgets/focus_flower1.png" id="1_ntbmj"]
+[ext_resource type="Texture2D" uid="uid://bbkual1cadsnc" path="res://FlovertimeTheme/Widgets/focus_flower2.png" id="2_ix2qh"]
+
+[resource]
+frames = 2
+frame_0/texture = ExtResource("1_ntbmj")
+frame_1/texture = ExtResource("2_ix2qh")
+frame_1/duration = 1.0

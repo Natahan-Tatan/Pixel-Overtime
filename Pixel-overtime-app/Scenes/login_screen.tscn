@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi8w3ptbjfcnk"]
+
+[ext_resource type="Script" uid="uid://cn1achjtu1g2h" path="res://Scenes/menu.gd" id="1_hijib"]
+[ext_resource type="Texture2D" uid="uid://b1i6xk0ff5dm4" path="res://login_anim.tres" id="2_hijib"]
+
+[node name="LoginScreen" type="Panel"]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Background_Panel"
+
+[node name="Menu" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(680, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 3.21
+alignment = 1
+script = ExtResource("1_hijib")
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="TextureRect" parent="Menu"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+texture = ExtResource("2_hijib")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="EmailEdit" type="LineEdit" parent="Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SimpleEdit"
+placeholder_text = "Email"
+clear_button_enabled = true
+caret_blink = true
+caret_mid_grapheme = true
+
+[node name="PassEdit" type="LineEdit" parent="Menu"]
+layout_mode = 2
+theme_type_variation = &"SimpleEdit"
+placeholder_text = "Password"
+clear_button_enabled = true
+caret_blink = true
+caret_mid_grapheme = true
+secret = true
+secret_character = ""
+
+[node name="StayLoginContainer" type="HBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="StayLoginButton" type="CheckButton" parent="Menu/StayLoginContainer"]
+layout_mode = 2
+text = "Remember me"
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="Login" type="Button" parent="Menu/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"Button_Blue"
+text = "Log in"
+
+[node name="Register" type="Button" parent="Menu/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "register"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu"]
+layout_mode = 2

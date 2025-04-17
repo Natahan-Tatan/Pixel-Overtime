@@ -36,9 +36,9 @@ namespace pixel_overtime_api;
 public static class Version
 {
     public const int Major = 0;
-    public const int Minor = 0;
+    public const int Minor = 1;
     public const int Patch = 0;
     public const string Dev = "";
 
-    public static string AsString() => $"{Major}-{Minor}-{Patch}{(!string.IsNullOrWhiteSpace(Dev)?$"-{Dev}":"")}";
+    public static string AsString() => $"{Major}.{Minor}.{Patch}{(!string.IsNullOrWhiteSpace(Dev)?$"-{Dev}":"")}";
 }

@@ -1,0 +1,11 @@
+[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://dtl4qc18etv06"]
+
+[ext_resource type="Texture2D" uid="uid://cotwu3bmrs03m" path="res://FlovertimeTheme/Widgets/Buttons/checkbox_checked2.png" id="1_qyljc"]
+[ext_resource type="Texture2D" uid="uid://depao7qvgh7hj" path="res://FlovertimeTheme/Widgets/Buttons/checkbox_checked1.png" id="1_tfvjh"]
+
+[resource]
+frames = 2
+frame_0/texture = ExtResource("1_tfvjh")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("1_qyljc")
+frame_1/duration = 0.5

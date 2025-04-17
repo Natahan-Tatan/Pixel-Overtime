@@ -29,14 +29,27 @@
 //   
 //   If you wish to use this software for commercial or professional purposes, please contact the author to discuss licensing options.
 
+using System.Reflection;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
 using pixel_overtime_api.Database.Models;
 using pixel_overtime_api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddW3CLogging(logging =>
+{
+    logging.FileSizeLimit = 10 * 1024 * 1024;
+    logging.RetainedFileCountLimit = 5;
+    logging.FileName = "pixel_overtime_api-access-";
+    logging.LogDirectory = "logs/";
+    logging.FlushInterval = TimeSpan.FromSeconds(1);
+});
 
 builder.Services.AddAuthorization();
 
@@ -68,15 +81,49 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://www.gnu.org/licenses/")
         },
     });
+
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: 'Bearer 12345abcdef'",
+         Name = "Authorization",
+         In = ParameterLocation.Header,
+         Type = SecuritySchemeType.ApiKey,
+         Scheme = "Bearer",
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+      {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+
+            },
+            new List<string>()
+        }
+    });
+
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"pixel-overtime-models.xml"));
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(opt => opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddDbContext<pixel_overtime_api.Database.ApiDbContext>(opt => {
     opt.UseSqlite("Data Source=../datas/overpixel.db;");
 });
 
 var app = builder.Build();
+
+app.UseW3CLogging();
 
 //app.MapIdentityApi<pixel_overtime_api.Database.Models.User>();
 app.MapCustomIdentityApi<pixel_overtime_api.Database.Models.User>();
@@ -90,7 +137,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint($"/swagger/{pixel_overtime_api.Version.AsString()}/swagger.json", $"v{pixel_overtime_api.Version.AsString()}");
+        options.SwaggerEndpoint($"/swagger/v{pixel_overtime_api.Version.AsString()}/swagger.json", $"v{pixel_overtime_api.Version.AsString()}");
         options.RoutePrefix = "doc";
     });
 }
