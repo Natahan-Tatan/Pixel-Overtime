@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0iymvko0c71q"]
+
+[ext_resource type="PackedScene" uid="uid://dy4kme6r6h14e" path="res://Scenes/base_template_screen.tscn" id="1_hijib"]
+[ext_resource type="Texture2D" uid="uid://b1i6xk0ff5dm4" path="res://login_anim.tres" id="2_ug2ta"]
+
+[node name="LoginScreen" instance=ExtResource("1_hijib")]
+
+[node name="TitleContainer" type="MarginContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="0"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 50
+
+[node name="Title" type="TextureRect" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/TitleContainer" index="0"]
+layout_mode = 2
+texture = ExtResource("2_ug2ta")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="EmailEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="1"]
+layout_mode = 2
+placeholder_text = "Email"
+caret_blink = true
+secret = true
+
+[node name="PassEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="2"]
+layout_mode = 2
+placeholder_text = "Password"
+caret_blink = true

@@ -12,16 +12,19 @@ config_version=5
 
 config/name="Fl'overtime"
 config/version="0.1.0"
-run/main_scene="uid://bi8w3ptbjfcnk"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+WebService="*res://Singletons/WebService/web_service.tscn"
 
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
 window/stretch/aspect="ignore"
-window/stretch/scale=0.75
+window/stretch/scale=0.6
 window/handheld/orientation=6
 
 [dotnet]

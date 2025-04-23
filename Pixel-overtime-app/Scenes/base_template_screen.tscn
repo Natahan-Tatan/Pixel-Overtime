@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy4kme6r6h14e"]
+
+[ext_resource type="Script" uid="uid://c1qcuh8cfon3h" path="res://Scenes/auto_margin_container.gd" id="1_ix137"]
+
+[node name="BaseTemplateScreen" type="Panel"]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Background_Panel"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AutoMarginContainer" type="MarginContainer" parent="ScrollContainer/CenterContainer"]
+custom_minimum_size = Vector2(680, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+script = ExtResource("1_ix137")
+max_viewport_percent = 30
+
+[node name="MainContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true

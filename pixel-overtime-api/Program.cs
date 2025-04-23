@@ -142,4 +142,15 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+// If we are in production, we must ensure that the database file exists.
+// In developpement, we must use migrations system so we must not use automatique database creation
+if(app.Environment.IsProduction())
+{
+    using(var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<pixel_overtime_api.Database.ApiDbContext>();
+        dbContext.Database.EnsureCreated();
+    }
+}
+
 app.Run();
