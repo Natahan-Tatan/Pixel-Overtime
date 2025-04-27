@@ -6,5 +6,6 @@ public enum TimeReason
 {
     UNSPECIFIED,
     FIX_BUG,
-    DEPLOYMENT
+    DEPLOYMENT,
+    MEETING
 }

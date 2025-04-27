@@ -1,3 +1,5 @@
+class_name horizontal_entry_animation
+
 extends Container
 
 signal animation_finished()
@@ -9,33 +11,36 @@ signal animation_finished()
 
 var elements_position: Dictionary
 
-@onready var screen_rect:= get_viewport_rect()
+@onready var screen_size = get_viewport().size;
 @onready var tween: Tween
 
 func start_animation() -> void:
 	for el in elements:
-		elements_position[el] = el.position
+		elements_position[el] = el.global_position
 
 	var newControl = Control.new()
-	newControl.position = self.position
+	newControl.global_position = self.global_position
 
-	tween = get_tree().create_tween();
+	tween = get_tree().create_tween()
+	screen_size = get_viewport().get_visible_rect().size
+	
 	self.replace_by(newControl)
 	
 	var right = firstComeFromRight
 	for el in elements:
+		el.modulate = Color.WHITE
 		var remote_position:= Vector2.ZERO
 		if(right):
-			remote_position = Vector2(screen_rect.size.x, el.global_position.y)
+			remote_position = Vector2(screen_size.x * 1.3, el.global_position.y)
 		else:
 			remote_position = Vector2(-el.get_global_rect().size.x, el.global_position.y)
 
 		if(!reverse):
 			el.global_position = remote_position;
-			tween.parallel().tween_property(el, "position", elements_position[el], duration)
+			tween.parallel().tween_property(el, "global_position", elements_position[el], duration)
 		else:
 			el.global_position = elements_position[el]
-			tween.parallel().tween_property(el, "position", remote_position, duration)
+			tween.parallel().tween_property(el, "global_position", remote_position, duration)
 
 		right = !right
 
@@ -47,8 +52,10 @@ func start_animation() -> void:
 	emit_signal("animation_finished")
 
 func _ready() -> void:
-	get_viewport().connect("size_changed", self._on_viewport_size_changed)
-	call_deferred("start_animation")
+	for el in elements:
+		el.modulate = Color.TRANSPARENT
 
-func _on_viewport_size_changed():
-	screen_rect = get_viewport_rect()
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	start_animation()

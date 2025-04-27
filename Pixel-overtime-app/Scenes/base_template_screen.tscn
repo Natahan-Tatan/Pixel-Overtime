@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy4kme6r6h14e"]
+[gd_scene load_steps=4 format=3 uid="uid://b182o6a4m836y"]
 
 [ext_resource type="Script" uid="uid://c1qcuh8cfon3h" path="res://Scenes/auto_margin_container.gd" id="1_ix137"]
+[ext_resource type="Script" uid="uid://cdeknmdi8c56e" path="res://Scenes/base_screen.gd" id="1_ph4gd"]
+[ext_resource type="Script" uid="uid://diohjw7ll1qtx" path="res://Scenes/horizontal_entry_animation.gd" id="2_0hlaj"]
 
 [node name="BaseTemplateScreen" type="Panel"]
 clip_contents = true
@@ -10,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"Background_Panel"
+script = ExtResource("1_ph4gd")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
@@ -36,4 +39,5 @@ max_viewport_percent = 30
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("2_0hlaj")
 metadata/_edit_use_anchors_ = true

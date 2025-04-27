@@ -1,5 +1,3 @@
-@tool
-
 extends MarginContainer
 
 @export_range(10, 100) var max_viewport_percent:= 80;

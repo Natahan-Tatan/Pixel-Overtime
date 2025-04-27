@@ -1,87 +1,68 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddpccuap485m1"]
+[gd_scene load_steps=4 format=3 uid="uid://ddpccuap485m1"]
 
-[ext_resource type="PackedScene" uid="uid://dy4kme6r6h14e" path="res://Scenes/base_template_screen.tscn" id="1_26n6s"]
+[ext_resource type="PackedScene" uid="uid://b182o6a4m836y" path="res://Scenes/base_template_screen.tscn" id="1_26n6s"]
+[ext_resource type="Script" uid="uid://coohcdoq1dw3v" path="res://Scenes/Register-Login/register_screen.gd" id="2_1y6my"]
 [ext_resource type="Texture2D" uid="uid://b1i6xk0ff5dm4" path="res://login_anim.tres" id="2_ub8sq"]
 
-[sub_resource type="Shader" id="Shader_hdvc4"]
-code = "shader_type canvas_item;
+[node name="RegisterScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_26n6s")]
+script = ExtResource("2_1y6my")
+login = "uid://c0iymvko0c71q"
+animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
+first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailEdit")
 
-void vertex() {
-	
-}
+[node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
+duration = 0.5
+elements = [NodePath("EmailEdit"), NodePath("NameEdit"), NodePath("PassEdit"), NodePath("RetypePassEdit"), NodePath("ButtonsContainer")]
 
-void fragment() {
-	
-}
+[node name="TitleContainer" type="MarginContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="0"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 50
 
-//void light() {
-//	// Called for every pixel for every light affecting the CanvasItem.
-//	// Uncomment to replace the default light processing function with this one.
-//}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1y6my"]
-shader = SubResource("Shader_hdvc4")
-
-[node name="RegisterScreen" instance=ExtResource("1_26n6s")]
-
-[node name="Title" type="TextureRect" parent="HorizontalEntryAnimation" index="0"]
-custom_minimum_size = Vector2(0, 300)
+[node name="Title" type="TextureRect" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/TitleContainer" index="0"]
 layout_mode = 2
 texture = ExtResource("2_ub8sq")
-expand_mode = 3
-stretch_mode = 5
+expand_mode = 5
+stretch_mode = 4
 
-[node name="EmailEdit" type="LineEdit" parent="HorizontalEntryAnimation" index="1"]
+[node name="EmailEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="1"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"SimpleEdit"
 placeholder_text = "Email"
-clear_button_enabled = true
 caret_blink = true
-caret_mid_grapheme = true
+secret = true
 
-[node name="NameEdit" type="LineEdit" parent="HorizontalEntryAnimation" index="2"]
+[node name="NameEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="2"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"SimpleEdit"
-placeholder_text = "Display name"
-clear_button_enabled = true
+placeholder_text = "Name"
 caret_blink = true
-caret_mid_grapheme = true
+secret = true
 
-[node name="PassEdit" type="LineEdit" parent="HorizontalEntryAnimation" index="3"]
+[node name="PassEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="3"]
 layout_mode = 2
-theme_type_variation = &"SimpleEdit"
 placeholder_text = "Password"
-clear_button_enabled = true
 caret_blink = true
-caret_mid_grapheme = true
-secret = true
-secret_character = ""
 
-[node name="RetypePassEdit" type="LineEdit" parent="HorizontalEntryAnimation" index="4"]
+[node name="RetypePassEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="4"]
 layout_mode = 2
-theme_type_variation = &"SimpleEdit"
-placeholder_text = "Retype password"
-clear_button_enabled = true
+placeholder_text = "Retype Password"
 caret_blink = true
-caret_mid_grapheme = true
-secret = true
-secret_character = ""
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="HorizontalEntryAnimation" index="5"]
+[node name="ButtonsContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="5"]
 layout_mode = 2
 
-[node name="Back" type="Button" parent="HorizontalEntryAnimation/ButtonsContainer" index="0"]
-material = SubResource("ShaderMaterial_1y6my")
+[node name="LogInButton" type="Button" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
 theme_type_variation = &"Button_Red"
 text = "Back to login"
 
-[node name="Register" type="Button" parent="HorizontalEntryAnimation/ButtonsContainer" index="1"]
+[node name="RegisterButton" type="Button" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "register"
+size_flags_stretch_ratio = 1.5
+text = "Register"
+
+[connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/LogInButton" to="." method="_on_log_in_button_pressed"]
