@@ -14,7 +14,11 @@ var elements_position: Dictionary
 @onready var screen_size = get_viewport().size;
 @onready var tween: Tween
 
-func start_animation() -> void:
+func start_animation() -> bool:
+
+	if(tween != null and tween.is_running()):
+		return false
+
 	for el in elements:
 		elements_position[el] = el.global_position
 
@@ -22,9 +26,9 @@ func start_animation() -> void:
 	newControl.global_position = self.global_position
 
 	tween = get_tree().create_tween()
+	tween.finished.connect(self._on_tween_finished.bind(newControl), CONNECT_ONE_SHOT)
+
 	screen_size = get_viewport().get_visible_rect().size
-	
-	self.replace_by(newControl)
 	
 	var right = firstComeFromRight
 	for el in elements:
@@ -44,8 +48,11 @@ func start_animation() -> void:
 
 		right = !right
 
-	await tween.finished
+	self.replace_by(newControl)
 
+	return true
+
+func _on_tween_finished(newControl: Control) -> void:
 	newControl.replace_by(self)
 	newControl.queue_free()
 
