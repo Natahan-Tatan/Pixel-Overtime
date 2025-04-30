@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 WebService="*res://Singletons/WebService/web_service.tscn"
-Config="*res://Singletons/config.gd"
+Config="*res://Singletons/Config/config.gd"
 
 [display]
 
