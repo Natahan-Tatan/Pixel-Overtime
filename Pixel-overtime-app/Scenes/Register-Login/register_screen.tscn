@@ -12,7 +12,7 @@ first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContai
 
 [node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
 clip_contents = false
-duration = 5.0
+duration = 0.25
 elements = [NodePath("EmailEdit"), NodePath("NameEdit"), NodePath("PassEdit"), NodePath("RetypePassEdit"), NodePath("ButtonsContainer")]
 
 [node name="TitleContainer" type="MarginContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="0"]

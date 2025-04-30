@@ -19,12 +19,16 @@ config/icon="res://icon.svg"
 [autoload]
 
 WebService="*res://Singletons/WebService/web_service.tscn"
+Config="*res://Singletons/config.gd"
 
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
+window/size/window_width_override=640
+window/size/window_height_override=800
 window/stretch/aspect="ignore"
+window/stretch/scale=0.6
 window/handheld/orientation=6
 
 [dotnet]
