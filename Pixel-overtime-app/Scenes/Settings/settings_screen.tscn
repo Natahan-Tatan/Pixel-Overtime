@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://28mahvciuia3"]
+
+[ext_resource type="PackedScene" uid="uid://b182o6a4m836y" path="res://Scenes/base_template_screen.tscn" id="1_1tkr7"]
+[ext_resource type="Script" uid="uid://b7kcwyfejr8rb" path="res://Scenes/Settings/settings_screen.gd" id="2_r11u1"]
+[ext_resource type="Texture2D" uid="uid://b1i6xk0ff5dm4" path="res://login_anim.tres" id="2_tmcy6"]
+
+[node name="SettingsScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_1tkr7")]
+script = ExtResource("2_r11u1")
+login = "uid://c0iymvko0c71q"
+animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
+first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ScaleField/ScaleOptionButton")
+
+[node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
+duration = 0.25
+elements = [NodePath("ScaleField"), NodePath("InstanceField"), NodePath("CustomInstanceField"), NodePath("ReturnButton")]
+
+[node name="TitleContainer" type="MarginContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="0"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 50
+
+[node name="Title" type="TextureRect" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/TitleContainer" index="0"]
+layout_mode = 2
+texture = ExtResource("2_tmcy6")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="ScaleField" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="1"]
+layout_mode = 2
+
+[node name="ScaleLabel" type="Label" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ScaleField" index="0"]
+layout_mode = 2
+text = "UI Scale:  "
+
+[node name="ScaleOptionButton" type="OptionButton" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ScaleField" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 5
+popup/item_0/text = "75%"
+popup/item_0/id = 75
+popup/item_1/text = "100%"
+popup/item_1/id = 100
+popup/item_2/text = "125%"
+popup/item_2/id = 125
+popup/item_3/text = "150%"
+popup/item_3/id = 150
+popup/item_4/text = "200%"
+popup/item_4/id = 200
+
+[node name="InstanceField" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="2"]
+layout_mode = 2
+
+[node name="ScaleLabel" type="Label" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/InstanceField" index="0"]
+layout_mode = 2
+text = "Instance: "
+
+[node name="InstanceOptionButton" type="OptionButton" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/InstanceField" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+icon_alignment = 1
+expand_icon = true
+selected = 0
+item_count = 3
+popup/item_0/text = "Flovertime official"
+popup/item_0/id = 0
+popup/item_1/id = 100
+popup/item_1/separator = true
+popup/item_2/text = "Custom"
+popup/item_2/id = 1
+
+[node name="CustomInstanceField" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="3"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CustomInstanceLabel" type="Label" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/CustomInstanceField" index="0"]
+layout_mode = 2
+text = "Custom instance URL:"
+
+[node name="CustomInstanceEditSet" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/CustomInstanceField" index="1"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CustomInstanceEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/CustomInstanceField/CustomInstanceEditSet" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "ex: https://myflovertime.net/"
+virtual_keyboard_type = 7
+caret_blink = true
+
+[node name="CustomInstanceEditErrorLabel" type="Label" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/CustomInstanceField/CustomInstanceEditSet" index="1"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_type_variation = &"ErrorLabel"
+text = "Invalid url"
+
+[node name="ReturnButton" type="Button" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"Button_Blue"
+text = "Go back to login"
+
+[connection signal="item_selected" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ScaleField/ScaleOptionButton" to="." method="_on_scale_option_button_item_selected"]
+[connection signal="item_selected" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/InstanceField/InstanceOptionButton" to="." method="_on_instance_option_button_item_selected"]
+[connection signal="text_changed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/CustomInstanceField/CustomInstanceEditSet/CustomInstanceEdit" to="." method="_on_custom_instance_edit_text_changed"]
+[connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ReturnButton" to="." method="_on_return_button_pressed"]

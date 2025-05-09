@@ -10,6 +10,7 @@ signal animation_finished()
 @export var elements: Array[Control]
 
 var elements_position: Dictionary
+var elements_modulate: Dictionary
 
 @onready var screen_size = get_viewport().size;
 @onready var tween: Tween
@@ -32,7 +33,7 @@ func start_animation() -> bool:
 	
 	var right = firstComeFromRight
 	for el in elements:
-		el.modulate = Color.WHITE
+		el.modulate = elements_modulate[el]
 		var remote_position:= Vector2.ZERO
 		if(right):
 			remote_position = Vector2(screen_size.x * 1.3, el.global_position.y)
@@ -60,6 +61,7 @@ func _on_tween_finished(newControl: Control) -> void:
 
 func _ready() -> void:
 	for el in elements:
+		elements_modulate[el] = el.modulate
 		el.modulate = Color.TRANSPARENT
 
 	await get_tree().process_frame

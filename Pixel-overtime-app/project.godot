@@ -25,10 +25,13 @@ Config="*res://Singletons/Config/config.gd"
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
+window/size/transparent=true
 window/size/window_width_override=640
-window/size/window_height_override=800
+window/size/window_height_override=900
+window/subwindows/embed_subwindows=false
 window/stretch/aspect="ignore"
 window/stretch/scale=0.6
+window/per_pixel_transparency/allowed=true
 window/handheld/orientation=6
 
 [dotnet]
@@ -49,3 +52,9 @@ theme/custom="uid://6xodd4q0doio"
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=true
+textures/default_filters/anisotropic_filtering_level=0
+textures/decals/filter=0
+textures/light_projectors/filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

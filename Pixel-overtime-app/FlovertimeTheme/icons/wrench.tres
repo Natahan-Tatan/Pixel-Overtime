@@ -1,0 +1,10 @@
+[gd_resource type="AnimatedTexture" load_steps=3 format=3 uid="uid://bxs144nkbcc8o"]
+
+[ext_resource type="Texture2D" uid="uid://tu0oc1bb5idy" path="res://FlovertimeTheme/icons/wrench1.png" id="1_upx03"]
+[ext_resource type="Texture2D" uid="uid://chf1lao58xgqs" path="res://FlovertimeTheme/icons/wrench2.png" id="2_u1jar"]
+
+[resource]
+frames = 2
+frame_0/texture = ExtResource("1_upx03")
+frame_1/texture = ExtResource("2_u1jar")
+frame_1/duration = 1.0

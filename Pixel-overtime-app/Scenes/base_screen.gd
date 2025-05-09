@@ -8,6 +8,19 @@ const AnimationEntry = preload("res://Scenes/horizontal_entry_animation.gd")
 @export var first_focused_input: Control = null
 
 func _ready() -> void:
-    if(first_focused_input != null):
-        await animated_container_node.animation_finished
-        first_focused_input.grab_focus.call_deferred()
+	if(first_focused_input != null):
+		await animated_container_node.animation_finished
+		first_focused_input.grab_focus.call_deferred()
+
+func _goto_screen_with_animation(scene_path) -> void:
+	animated_container_node.reverse = true;
+	
+	if(animated_container_node.start_animation()):
+		var newScene: PackedScene = ResourceLoader.load(scene_path)
+
+		await animated_container_node.animation_finished
+
+		self.visible = false
+		get_node("/root").add_child(newScene.instantiate())
+
+		self.queue_free()

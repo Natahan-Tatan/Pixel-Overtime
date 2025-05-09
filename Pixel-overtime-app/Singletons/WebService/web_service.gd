@@ -1,14 +1,19 @@
 extends Node
 
-@export var instance_host: String:
+var instance_host: String:
 	get: 
-		return _instance_domain
+		return "%s:%s" % [_instance_domain, _instance_port]
 	set(value):
 		var splitted = value.split(":")
-		_instance_domain = "%s:%s" % [splitted[0], splitted[1]]
-
+		_instance_domain = ("%s:%s" % [splitted[0], splitted[1]]).to_lower()
+	
 		if(splitted.size() > 2):
 			_instance_port = int(splitted[2])
+		elif(_instance_domain.begins_with("https")):
+			_instance_port = 443
+		else:
+			_instance_port = 80
+
 
 
 var _instance_domain:= ""

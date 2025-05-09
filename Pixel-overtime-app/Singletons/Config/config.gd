@@ -1,8 +1,13 @@
 extends Node
 
+var WebService = preload("res://Singletons/WebService/web_service.gd")
+
 const CONFIG_FILE: = "user://config.tres"
+const OFFICIAL_INSTANCE: = "https://api.flovertime.natahan.net"
 
 var _values: ConfigValues = null
+
+@onready var web_service_node:= $"/root/WebService" as WebService
 
 @export var values: ConfigValues:
 	get:
@@ -24,15 +29,21 @@ var _values: ConfigValues = null
 	set(value):
 		_values = value
 		if(_is_ready):
-			_update_settings()
+			_apply_settings()
 		ResourceSaver.save(_values, CONFIG_FILE)
 
 var _is_ready:= false
 func _ready() -> void:
-
-	_update_settings()
+	_apply_settings()
 	_is_ready = true
 
-func _update_settings() -> void:
-	print(values.ui_scale)
+func save() -> void:
+	values = _values
+
+func _apply_settings() -> void:
 	get_tree().root.content_scale_factor = float(ProjectSettings.get_setting("display/window/stretch/scale")) * values.ui_scale
+
+	if(values.instance_type == ConfigValues.InstanceType.CUSTOM):
+		web_service_node.instance_host = values.custom_instance_url
+	else:
+		web_service_node.instance_host = OFFICIAL_INSTANCE

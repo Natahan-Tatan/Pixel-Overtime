@@ -41,7 +41,6 @@ metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
 
 [node name="WebService" type="Node"]
 script = ExtResource("1_tua53")
-instance_host = "http://localhost:5142"
 route_register = SubResource("Resource_m2iw7")
 route_login = SubResource("Resource_y2q0x")
 route_refresh = SubResource("Resource_hei7v")

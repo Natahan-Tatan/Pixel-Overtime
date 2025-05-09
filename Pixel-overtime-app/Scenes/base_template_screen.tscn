@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://diohjw7ll1qtx" path="res://Scenes/horizontal_entry_animation.gd" id="2_0hlaj"]
 
 [node name="BaseTemplateScreen" type="Panel"]
-clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,7 +35,6 @@ script = ExtResource("1_ix137")
 max_viewport_percent = 30
 
 [node name="MainContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer"]
-clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("2_0hlaj")
