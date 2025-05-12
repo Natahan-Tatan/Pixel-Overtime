@@ -1,20 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0iymvko0c71q"]
+[gd_scene load_steps=6 format=3 uid="uid://c0iymvko0c71q"]
 
 [ext_resource type="PackedScene" uid="uid://b182o6a4m836y" path="res://Scenes/base_template_screen.tscn" id="1_hijib"]
 [ext_resource type="Script" uid="uid://w4f2g6wvppi" path="res://Scenes/Register-Login/login_screen.gd" id="2_jaf8b"]
 [ext_resource type="Texture2D" uid="uid://b1i6xk0ff5dm4" path="res://login_anim.tres" id="2_ug2ta"]
 [ext_resource type="Texture2D" uid="uid://bxs144nkbcc8o" path="res://FlovertimeTheme/icons/wrench.tres" id="4_o7odf"]
+[ext_resource type="PackedScene" uid="uid://cyy6nsl4qd3vi" path="res://Prefabs/FormField/form_field.tscn" id="4_u1mjq"]
 
-[node name="LoginScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_hijib")]
+[node name="LoginScreen" instance=ExtResource("1_hijib")]
 script = ExtResource("2_jaf8b")
 register = "uid://ddpccuap485m1"
 settings = "uid://28mahvciuia3"
 animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
-first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailEdit")
 
 [node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
 duration = 0.25
-elements = [NodePath("EmailEdit"), NodePath("PassEdit"), NodePath("MiddleContainer"), NodePath("ButtonsContainer")]
+elements = [NodePath("EmailField"), NodePath("PasswordField"), NodePath("MiddleContainer"), NodePath("ButtonsContainer")]
 
 [node name="TitleContainer" type="MarginContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="0"]
 clip_contents = true
@@ -30,18 +30,17 @@ texture = ExtResource("2_ug2ta")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="EmailEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="1"]
+[node name="EmailField" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="1" instance=ExtResource("4_u1mjq")]
+unique_name_in_owner = true
 layout_mode = 2
-placeholder_text = "Email"
-virtual_keyboard_type = 5
-caret_blink = true
-secret = true
+label = "Email"
 
-[node name="PassEdit" type="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="2"]
+[node name="PasswordField" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="2" instance=ExtResource("4_u1mjq")]
+unique_name_in_owner = true
 layout_mode = 2
-placeholder_text = "Password"
-virtual_keyboard_type = 6
-caret_blink = true
+field_name = "password"
+label = "Password"
+secret = true
 
 [node name="MiddleContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="3"]
 layout_mode = 2
@@ -60,7 +59,15 @@ layout_mode = 2
 theme_type_variation = &"Button_Red"
 icon = ExtResource("4_o7odf")
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="4"]
+[node name="GlobalErrorLabel" type="Label" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="4"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_type_variation = &"ErrorLabel"
+text = "Coucou tu veux voir mon erreur?"
+autowrap_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="5"]
 layout_mode = 2
 
 [node name="LogInButton" type="Button" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer" index="0"]
@@ -76,4 +83,5 @@ size_flags_stretch_ratio = 0.5
 text = "Register"
 
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/LogInButton" to="." method="_on_log_in_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/RegisterButton" to="." method="_on_register_button_pressed"]

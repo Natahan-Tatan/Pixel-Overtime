@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyy6nsl4qd3vi"]
+
+[ext_resource type="Script" uid="uid://c5rlaa5hif8bk" path="res://Prefabs/FormField/form_field.gd" id="1_2btrm"]
+
+[node name="EmailField" type="VBoxContainer" groups=["Form Fields"]]
+size_flags_horizontal = 3
+theme_override_constants/separation = -10
+script = ExtResource("1_2btrm")
+field_name = "email"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+virtual_keyboard_type = 5
+caret_blink = true
+secret = true
+
+[node name="ErrorContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+
+[node name="ErrorLabel" type="Label" parent="ErrorContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ErrorLabel"
+text = "Test d'erreur"
+autowrap_mode = 3
+visible_characters_behavior = 2

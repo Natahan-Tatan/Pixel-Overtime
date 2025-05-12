@@ -128,7 +128,10 @@ func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, 
 func register(email: String, password: String, username: String):
 	pass
 
-func login(email: String, password: String):
+func login(email: String, password: String) -> Dictionary:
+
+	# Validation
+	
 	var body = JSON.stringify({
 			"email": email,
 			"password": password,
@@ -137,6 +140,11 @@ func login(email: String, password: String):
 	var response = await self._do_request("Login", route_login, {}, body, false, false)
 
 	var dict = JSON.parse_string(response.get_string_from_utf8())
+
+	if(dict == null):
+		print("[Webservice] login error: no response from API.")
+		return {"": "No response from API. Please check your configuration."}
+
 	user.bearer = dict["accessToken"]
 	user.refresh = dict["refreshToken"]
 
@@ -154,6 +162,8 @@ func login(email: String, password: String):
 		str(user.email_confirmed),
 		Time.get_datetime_string_from_datetime_dict(user.account_created_date, true)
 	])
+
+	return {}
 
 func get_me_infos():
 	var response = await self._do_request("GetMeInfos", route_get_user_infos, {}, "", true, true)

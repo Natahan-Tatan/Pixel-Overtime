@@ -38,6 +38,10 @@ window/handheld/orientation=6
 
 project/assembly_name="pixel-overtime-app"
 
+[global_group]
+
+"Form Fields"=""
+
 [gui]
 
 theme/custom="uid://6xodd4q0doio"
