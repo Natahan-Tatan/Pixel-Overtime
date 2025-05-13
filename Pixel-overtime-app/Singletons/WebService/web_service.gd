@@ -1,11 +1,28 @@
 extends Node
 
+class ApiResponse:
+	var internal_error:= false
+	var response: PackedByteArray
+	var http_code: int
+
+	func _init(_response: PackedByteArray, _http_code: int, _internal_error:= false):
+		self.internal_error = _internal_error
+		self.response = _response
+		self.http_code = _http_code
+
+
+
 var instance_host: String:
 	get: 
 		return "%s:%s" % [_instance_domain, _instance_port]
 	set(value):
+		value = value.strip_edges()
 		var splitted = value.split(":")
-		_instance_domain = ("%s:%s" % [splitted[0], splitted[1]]).to_lower()
+
+		if(splitted.size() > 1):
+			_instance_domain = ("%s:%s" % [splitted[0], splitted[1]]).to_lower()
+		else:
+			_instance_domain = value.to_lower()
 	
 		if(splitted.size() > 2):
 			_instance_port = int(splitted[2])
@@ -56,73 +73,73 @@ func _load_user():
 func _save_user():
 	ResourceSaver.save(user, USER_SAVE_FILE)
 
-func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, json_data: String, use_auth: bool, reauth_on_401: bool = true) -> PackedByteArray:
+func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, json_data: String, use_auth: bool, reauth_on_401: bool = true) -> ApiResponse:
 	var client = HTTPClient.new()
+	var response = PackedByteArray()
 
 	var error:= client.connect_to_host(_instance_domain, _instance_port);
 	if (error != OK):
 		emit_signal("api_error", "Web service: "+caller, "Error when connect to host "+instance_host+": "+error_string(error))
-
-	while client.get_status() == HTTPClient.STATUS_CONNECTING or client.get_status() == HTTPClient.STATUS_RESOLVING:
-		client.poll()
-		await get_tree().process_frame
-	
-	var headers = [
-		"User-Agent: OverPixel-Godot_Client_v" + ProjectSettings.get_setting("application/config/version") + OS.get_name() + "-" + OS.get_model_name()
-	]
-
-	if(route.method == HTTPClient.METHOD_POST or route.method == HTTPClient.METHOD_PATCH or  route.method == HTTPClient.METHOD_PUT):
-		headers.append("Content-Type: application/json")
-
-	if(use_auth):
-		headers.append("Authorization: Bearer %s" % user.bearer)
-
-	var request_uri = route.route
-
-	if(query_string.size() > 0):
-		request_uri += "?"
-		for key in query_string:
-			request_uri += ("%s=%s&" % [key, str(query_string[key])]).uri_encode()
-
-	print(request_uri)
-	
-	error = client.request(int(route.method), request_uri, headers, json_data)
-	if (error != OK):
-		emit_signal("api_error", "Web service: " + caller, "Error when create request to " + request_uri.split("?")[0] + ": " + error_string(error))
-
-	while client.get_status() == HTTPClient.STATUS_REQUESTING:
-		client.poll()
-		await get_tree().process_frame
-
-	var response = PackedByteArray()
-
-	if(client.has_response()):
-		
-		while client.get_status() == HTTPClient.STATUS_BODY:
+	else:
+		while client.get_status() == HTTPClient.STATUS_CONNECTING or client.get_status() == HTTPClient.STATUS_RESOLVING:
 			client.poll()
-			var chunk = client.read_response_body_chunk()
-			if chunk.size() == 0:
+			await get_tree().process_frame
+		
+		var headers = [
+			"User-Agent: OverPixel-Godot_Client_v" + ProjectSettings.get_setting("application/config/version") + OS.get_name() + "-" + OS.get_model_name()
+		]
+
+		if(route.method == HTTPClient.METHOD_POST or route.method == HTTPClient.METHOD_PATCH or  route.method == HTTPClient.METHOD_PUT):
+			headers.append("Content-Type: application/json")
+
+		if(use_auth):
+			headers.append("Authorization: Bearer %s" % user.bearer)
+
+		var request_uri = route.route
+
+		if(query_string.size() > 0):
+			request_uri += "?"
+			for key in query_string:
+				request_uri += ("%s=%s&" % [key, str(query_string[key])]).uri_encode()
+
+		print(request_uri)
+		
+		error = client.request(int(route.method), request_uri, headers, json_data)
+		if (error != OK):
+			emit_signal("api_error", "Web service: " + caller, "Error when create request to " + request_uri.split("?")[0] + ": " + error_string(error))
+		else:
+			while client.get_status() == HTTPClient.STATUS_REQUESTING:
+				client.poll()
 				await get_tree().process_frame
-			else:
-				response = response + chunk
 
-		# Retry if received unauthorise response
-		if(use_auth and reauth_on_401 and client.get_response_code() == 401):
-			var refreshResponse = await self._do_request(caller, route_refresh, {}, JSON.stringify({"refreshToken": user.refresh}), false, false)
+			if(client.has_response()):
+				
+				while client.get_status() == HTTPClient.STATUS_BODY:
+					client.poll()
+					var chunk = client.read_response_body_chunk()
+					if chunk.size() == 0:
+						await get_tree().process_frame
+					else:
+						response = response + chunk
 
-			if(refreshResponse.size() > 0):
-				var dict = JSON.parse_string(refreshResponse.get_string_from_utf8())
-				user.bearer = dict["accessToken"]
-				user.refresh = dict["refreshToken"]
-				self._save_user()
+				# Retry if received unauthorise response
+				if(use_auth and reauth_on_401 and client.get_response_code() == 401):
+					var refreshResponse = await self._do_request(caller, route_refresh, {}, JSON.stringify({"refreshToken": user.refresh}), false, false)
+
+					if(refreshResponse.size() > 0):
+						var dict = JSON.parse_string(refreshResponse.get_string_from_utf8())
+						user.bearer = dict["accessToken"]
+						user.refresh = dict["refreshToken"]
+						self._save_user()
+					
+					response = await self._do_request(caller, route, query_string, json_data, false, false)
+
+				if(client.get_response_code() >= 400):
+					emit_signal("api_error", "Web service: "+caller, "Request returns error " + request_uri.split("?")[0] + " (" + str(client.get_response_code()) + "): " + response.get_string_from_utf8())
 			
-			response = await self._do_request(caller, route, query_string, json_data, false, false)
+		client.close()
 
-		if(client.get_response_code() >= 400):
-			emit_signal("api_error", "Web service: "+caller, "Request returns error " + request_uri.split("?")[0] + " (" + str(client.get_response_code()) + "): " + response.get_string_from_utf8())
-	
-	client.close();
-	return response;
+	return ApiResponse.new(response, client.get_response_code(), error != OK)
 
 
 func register(email: String, password: String, username: String):
@@ -130,8 +147,24 @@ func register(email: String, password: String, username: String):
 
 func login(email: String, password: String) -> Dictionary:
 
+	# Sanatize
+	email = email.strip_edges()
+
 	# Validation
-	
+	var validationErrors: Dictionary = {}
+
+	if(email.is_empty()):
+		validationErrors["email"] = "Email must be specified"
+	elif(!email.contains("@")):
+		validationErrors["email"] = "Email is invalid"
+
+	if(password.is_empty()):
+		validationErrors["password"] = "Password must be specified"
+
+	if(validationErrors.size() > 0):
+		return validationErrors
+
+	# Prepare request
 	var body = JSON.stringify({
 			"email": email,
 			"password": password,
@@ -139,10 +172,18 @@ func login(email: String, password: String) -> Dictionary:
 
 	var response = await self._do_request("Login", route_login, {}, body, false, false)
 
+	if(response.internal_error):
+		return {"": "No response from API. Please check your configuration."}
+
+	if(response.http_code != 200):
+		return {"": "You email and password don't match."}
+
 	var dict = JSON.parse_string(response.get_string_from_utf8())
 
+	if(response.internal_error):
+		return {"": "Bad response from API. Please check your configuration."}
+
 	if(dict == null):
-		print("[Webservice] login error: no response from API.")
 		return {"": "No response from API. Please check your configuration."}
 
 	user.bearer = dict["accessToken"]

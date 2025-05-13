@@ -55,3 +55,6 @@ func display_error(errors: Dictionary) -> void:
 		if(key == field_name && errors[key] != ""):
 			error_label.text = errors[key]
 			error_label.visible = true
+
+func hide_error() -> void:
+	error_label.visible = false

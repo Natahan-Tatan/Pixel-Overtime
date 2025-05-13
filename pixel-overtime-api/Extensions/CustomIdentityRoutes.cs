@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 namespace pixel_overtime_api.Extensions;
 
@@ -51,7 +52,15 @@ public static class IdentityApiEndpointRouteBuilderExtensions
         // We'll figure out a unique endpoint name based on the final route pattern during endpoint generation.
         string? confirmEmailEndpointName = null;
 
-        var routeGroup = endpoints.MapGroup("");
+        var routeGroup = endpoints.MapGroup("")
+                                .WithOpenApi(opt => {
+                                    opt.Tags = [
+                                        new OpenApiTag{
+                                            Name = "Authentification"
+                                        }
+                                    ];
+                                    return opt;
+                                });
 
         // NOTE: We cannot inject UserManager<TUser> directly because the TUser generic parameter is currently unsupported by RDG.
         // https://github.com/dotnet/aspnetcore/issues/47338
