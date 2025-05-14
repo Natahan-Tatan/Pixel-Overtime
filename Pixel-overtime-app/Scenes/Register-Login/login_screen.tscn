@@ -6,11 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://bxs144nkbcc8o" path="res://FlovertimeTheme/icons/wrench.tres" id="4_o7odf"]
 [ext_resource type="PackedScene" uid="uid://cyy6nsl4qd3vi" path="res://Prefabs/FormField/form_field.tscn" id="4_u1mjq"]
 
-[node name="LoginScreen" instance=ExtResource("1_hijib")]
+[node name="LoginScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_hijib")]
 script = ExtResource("2_jaf8b")
 register = "uid://ddpccuap485m1"
 settings = "uid://28mahvciuia3"
 animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
+first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailField/LineEdit")
 
 [node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
 duration = 0.25
@@ -35,6 +36,10 @@ unique_name_in_owner = true
 layout_mode = 2
 label = "Email"
 
+[node name="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailField" index="0"]
+placeholder_text = "Email"
+secret = false
+
 [node name="PasswordField" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="2" instance=ExtResource("4_u1mjq")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -48,6 +53,7 @@ layout_mode = 2
 [node name="RememberMeCheckbox" type="CheckButton" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 0
+focus_neighbor_right = NodePath("../SettingsButton")
 text = "Remember me"
 
 [node name="Separator" type="Control" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer" index="1"]
@@ -56,6 +62,7 @@ size_flags_horizontal = 3
 
 [node name="SettingsButton" type="Button" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer" index="2"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../RememberMeCheckbox")
 theme_type_variation = &"Button_Red"
 icon = ExtResource("4_o7odf")
 
@@ -85,3 +92,5 @@ text = "Register"
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/LogInButton" to="." method="_on_log_in_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/RegisterButton" to="." method="_on_register_button_pressed"]
+
+[editable path="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailField"]

@@ -125,7 +125,6 @@ var app = builder.Build();
 
 app.UseW3CLogging();
 
-//app.MapIdentityApi<pixel_overtime_api.Database.Models.User>();
 app.MapCustomIdentityApi<pixel_overtime_api.Database.Models.User>();
 
 app.UseAuthorization();

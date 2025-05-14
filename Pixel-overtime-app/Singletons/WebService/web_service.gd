@@ -2,12 +2,12 @@ extends Node
 
 class ApiResponse:
 	var internal_error:= false
-	var response: PackedByteArray
+	var data: PackedByteArray
 	var http_code: int
 
 	func _init(_response: PackedByteArray, _http_code: int, _internal_error:= false):
 		self.internal_error = _internal_error
-		self.response = _response
+		self.data = _response
 		self.http_code = _http_code
 
 
@@ -76,6 +76,7 @@ func _save_user():
 func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, json_data: String, use_auth: bool, reauth_on_401: bool = true) -> ApiResponse:
 	var client = HTTPClient.new()
 	var response = PackedByteArray()
+	var code_http:= 0
 
 	var error:= client.connect_to_host(_instance_domain, _instance_port);
 	if (error != OK):
@@ -113,7 +114,8 @@ func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, 
 				await get_tree().process_frame
 
 			if(client.has_response()):
-				
+				code_http = client.get_response_code()
+
 				while client.get_status() == HTTPClient.STATUS_BODY:
 					client.poll()
 					var chunk = client.read_response_body_chunk()
@@ -121,7 +123,7 @@ func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, 
 						await get_tree().process_frame
 					else:
 						response = response + chunk
-
+				
 				# Retry if received unauthorise response
 				if(use_auth and reauth_on_401 and client.get_response_code() == 401):
 					var refreshResponse = await self._do_request(caller, route_refresh, {}, JSON.stringify({"refreshToken": user.refresh}), false, false)
@@ -136,10 +138,9 @@ func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, 
 
 				if(client.get_response_code() >= 400):
 					emit_signal("api_error", "Web service: "+caller, "Request returns error " + request_uri.split("?")[0] + " (" + str(client.get_response_code()) + "): " + response.get_string_from_utf8())
-			
 		client.close()
 
-	return ApiResponse.new(response, client.get_response_code(), error != OK)
+	return ApiResponse.new(response, code_http , error != OK)
 
 
 func register(email: String, password: String, username: String):
@@ -178,7 +179,7 @@ func login(email: String, password: String) -> Dictionary:
 	if(response.http_code != 200):
 		return {"": "You email and password don't match."}
 
-	var dict = JSON.parse_string(response.get_string_from_utf8())
+	var dict = JSON.parse_string(response.data.get_string_from_utf8())
 
 	if(response.internal_error):
 		return {"": "Bad response from API. Please check your configuration."}
@@ -208,7 +209,7 @@ func login(email: String, password: String) -> Dictionary:
 
 func get_me_infos():
 	var response = await self._do_request("GetMeInfos", route_get_user_infos, {}, "", true, true)
-	var dict = JSON.parse_string(response.get_string_from_utf8())
+	var dict = JSON.parse_string(response.data.get_string_from_utf8())
 	
 	user.id = dict["id"]
 	user.name = dict["name"]
