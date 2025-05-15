@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqpseoq3i7cs4"]
+
+[ext_resource type="PackedScene" uid="uid://b182o6a4m836y" path="res://Scenes/base_template_screen.tscn" id="1_sk5pj"]
+[ext_resource type="Texture2D" uid="uid://ci233jqwsqnh6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_left.png" id="2_ia7dg"]
+[ext_resource type="Texture2D" uid="uid://cb4tg4s3yfjx6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_right.png" id="3_hp78i"]
+
+[node name="BaseTemplateScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_sk5pj")]
+animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
+first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/FilterPanel/HBoxContainer/PreviousDate")
+
+[node name="AutoMarginContainer" parent="ScrollContainer/CenterContainer" index="0"]
+max_viewport_percent = 80
+min_width = 1280
+max_width = 2000
+
+[node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
+elements = [NodePath("FilterPanel")]
+
+[node name="FilterPanel" type="PanelContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="0"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/FilterPanel" index="0"]
+layout_mode = 2
+alignment = 1
+
+[node name="PreviousDate" type="TextureButton" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/FilterPanel/HBoxContainer" index="0"]
+layout_mode = 2
+texture_normal = ExtResource("2_ia7dg")
+stretch_mode = 3
+
+[node name="DateLabel" type="Label" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/FilterPanel/HBoxContainer" index="1"]
+layout_mode = 2
+text = "May 2025"
+
+[node name="NextDate" type="TextureButton" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/FilterPanel/HBoxContainer" index="2"]
+layout_mode = 2
+texture_normal = ExtResource("3_hp78i")
+stretch_mode = 3

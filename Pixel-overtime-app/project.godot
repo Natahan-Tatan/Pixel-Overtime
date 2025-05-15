@@ -23,7 +23,7 @@ Config="*res://Singletons/Config/config.gd"
 
 [display]
 
-window/size/viewport_width=720
+window/size/viewport_width=1280
 window/size/viewport_height=1280
 window/size/transparent=true
 window/size/window_width_override=640
