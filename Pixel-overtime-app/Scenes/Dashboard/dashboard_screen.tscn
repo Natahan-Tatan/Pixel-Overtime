@@ -9,9 +9,10 @@ animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContain
 first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/FilterPanel/HBoxContainer/PreviousDate")
 
 [node name="AutoMarginContainer" parent="ScrollContainer/CenterContainer" index="0"]
+custom_minimum_size = Vector2(1500.8, 0)
 max_viewport_percent = 80
-min_width = 1280
-max_width = 2000
+min_width = 800
+max_width = 3400
 
 [node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
 elements = [NodePath("FilterPanel")]
