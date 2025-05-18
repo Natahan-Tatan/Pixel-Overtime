@@ -38,3 +38,17 @@ text = "May 2025"
 layout_mode = 2
 texture_normal = ExtResource("3_hp78i")
 stretch_mode = 3
+
+[node name="ContentContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="1"]
+layout_mode = 2
+
+[node name="TimesContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Time" type="PanelContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="0"]
+layout_mode = 2
+
+[node name="SideContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3

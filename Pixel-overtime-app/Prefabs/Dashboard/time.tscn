@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bivlb1hvibe2i"]
+
+[ext_resource type="Texture2D" uid="uid://wrihegut5vy0" path="res://FlovertimeTheme/Widgets/focus_flower1.png" id="1_e3bat"]
+
+[node name="Time" type="PanelContainer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TypeIcon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_e3bat")
+stretch_mode = 5
+
+[node name="DateLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Dashboard_Time_Label"
+text = "08/05/2025"
+
+[node name="Separator" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"Dashboard_Time_Label"
+text = "Resolve bug"
