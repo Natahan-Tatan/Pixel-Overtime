@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bivlb1hvibe2i"]
+[gd_scene load_steps=4 format=3 uid="uid://bivlb1hvibe2i"]
 
+[ext_resource type="Texture2D" uid="uid://c3os261en4t6c" path="res://Prefabs/Dashboard/TimePanel/Item/time_panel_item_normal.png" id="1_1dd86"]
 [ext_resource type="Texture2D" uid="uid://wrihegut5vy0" path="res://FlovertimeTheme/Widgets/focus_flower1.png" id="1_e3bat"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_naptc"]
+texture = ExtResource("1_1dd86")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 24.0
+region_rect = Rect2(0, 0, 256, 128)
+
 [node name="Time" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxTexture_naptc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -14,7 +24,7 @@ stretch_mode = 5
 
 [node name="DateLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"Dashboard_Time_Label"
+theme_type_variation = &"Dashboard_Time_Item_label"
 text = "08/05/2025"
 
 [node name="Separator" type="Control" parent="HBoxContainer"]
@@ -23,5 +33,5 @@ layout_mode = 2
 
 [node name="DescriptionLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"Dashboard_Time_Label"
+theme_type_variation = &"Dashboard_Time_Item_label"
 text = "Resolve bug"
