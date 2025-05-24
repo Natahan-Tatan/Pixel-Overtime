@@ -11,3 +11,4 @@ class_name User
 
 @export var bearer = ""
 @export var refresh = ""
+@export var remember = false

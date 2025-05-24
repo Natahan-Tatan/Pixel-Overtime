@@ -10,6 +10,10 @@ var FormField = preload("res://Prefabs/FormField/form_field.gd")
 
 @onready var webservice:= $/root/WebService as WebService
 
+func _ready() -> void:
+	if(webservice.user.remember):
+		get_tree().change_scene_to_file(dashboard)
+
 func _on_register_button_pressed() -> void:
 	self._goto_screen_with_animation(register)
 
@@ -19,7 +23,7 @@ func _on_settings_button_pressed() -> void:
 
 func _on_log_in_button_pressed() -> void:
 	%GlobalErrorLabel.visible = false
-	var errors = await webservice.login(%EmailField.value, %PasswordField.value)
+	var errors = await webservice.login(%EmailField.value, %PasswordField.value, %RememberMeCheckbox.button_pressed)
 
 	if(errors.size() > 0):
 		for field in get_tree().get_nodes_in_group("Form Fields"):

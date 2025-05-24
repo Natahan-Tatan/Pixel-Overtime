@@ -10,8 +10,6 @@ class ApiResponse:
 		self.data = _response
 		self.http_code = _http_code
 
-
-
 var instance_host: String:
 	get: 
 		return "%s:%s" % [_instance_domain, _instance_port]
@@ -30,8 +28,6 @@ var instance_host: String:
 			_instance_port = 443
 		else:
 			_instance_port = 80
-
-
 
 var _instance_domain:= ""
 var _instance_port:= 443
@@ -143,11 +139,10 @@ func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, 
 
 	return ApiResponse.new(response, code_http , error != OK)
 
-
 func register(email: String, password: String, username: String):
 	pass
 
-func login(email: String, password: String) -> Dictionary:
+func login(email: String, password: String, remember:= false) -> Dictionary:
 
 	# Sanatize
 	email = email.strip_edges()
@@ -190,6 +185,7 @@ func login(email: String, password: String) -> Dictionary:
 
 	user.bearer = dict["accessToken"]
 	user.refresh = dict["refreshToken"]
+	user.remember = remember
 
 	# Update user infos
 	await get_me_infos()
@@ -197,11 +193,13 @@ func login(email: String, password: String) -> Dictionary:
 	print_rich("""[u][b]Current logged user[/b][/u]
 	[b]Id:[/b] %s
 	[b]Email:[/b] %s
-	[b]Email:[/b] %s
+	[b]Name:[/b] %s
+	[b]Email confirmed:[/b] %s
 	[b]Account created:[/b] %s
 	""" % [
 		user.id,
 		user.email,
+		user.name,
 		str(user.email_confirmed),
 		Time.get_datetime_string_from_datetime_dict(user.account_created_date, true)
 	])
