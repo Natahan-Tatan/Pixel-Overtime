@@ -5,6 +5,7 @@ extends MarginContainer
 @export_range(100, 5000) var max_width:= 1280;
 
 func _ready() -> void:
+    self._on_viewport_size_changed()
     get_viewport().connect("size_changed", self._on_viewport_size_changed)
 
 func _on_viewport_size_changed() -> void:

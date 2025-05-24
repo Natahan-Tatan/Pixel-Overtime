@@ -10,6 +10,7 @@
 script = ExtResource("2_jaf8b")
 register = "uid://ddpccuap485m1"
 settings = "uid://28mahvciuia3"
+dashboard = "uid://dqpseoq3i7cs4"
 animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
 first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailField/LineEdit")
 
@@ -47,26 +48,29 @@ field_name = "password"
 label = "Password"
 secret = true
 
-[node name="MiddleContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="3"]
+[node name="MiddleContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="3"]
 layout_mode = 2
 
-[node name="RememberMeCheckbox" type="CheckButton" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer" index="0"]
+layout_mode = 2
+
+[node name="RememberMeCheckbox" type="CheckButton" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer/HBoxContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 0
 focus_neighbor_right = NodePath("../SettingsButton")
 text = "Remember me"
 
-[node name="Separator" type="Control" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer" index="1"]
+[node name="Separator" type="Control" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer/HBoxContainer" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SettingsButton" type="Button" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer" index="2"]
+[node name="SettingsButton" type="Button" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer/HBoxContainer" index="2"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../RememberMeCheckbox")
 theme_type_variation = &"Button_Red"
 icon = ExtResource("4_o7odf")
 
-[node name="GlobalErrorLabel" type="Label" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="4"]
+[node name="GlobalErrorLabel" type="Label" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer" index="1"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -74,7 +78,7 @@ theme_type_variation = &"ErrorLabel"
 text = "Coucou tu veux voir mon erreur?"
 autowrap_mode = 2
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="5"]
+[node name="ButtonsContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="4"]
 layout_mode = 2
 
 [node name="LogInButton" type="Button" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer" index="0"]
@@ -89,7 +93,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 text = "Register"
 
-[connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/LogInButton" to="." method="_on_log_in_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/RegisterButton" to="." method="_on_register_button_pressed"]
 

@@ -11,7 +11,6 @@ animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContain
 first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailEdit")
 
 [node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
-clip_contents = false
 duration = 0.25
 elements = [NodePath("EmailEdit"), NodePath("NameEdit"), NodePath("PassEdit"), NodePath("RetypePassEdit"), NodePath("ButtonsContainer")]
 

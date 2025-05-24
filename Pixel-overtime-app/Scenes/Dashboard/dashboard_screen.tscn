@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://b182o6a4m836y" path="res://Scenes/base_template_screen.tscn" id="1_sk5pj"]
 [ext_resource type="Script" uid="uid://dbdev05si0lim" path="res://Scenes/Dashboard/filter_panel.gd" id="2_0b8t0"]
 [ext_resource type="Texture2D" uid="uid://ci233jqwsqnh6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_left.png" id="2_ia7dg"]
+[ext_resource type="Script" uid="uid://b3mbtqaduuuyy" path="res://Scenes/Dashboard/dashboard_screen.gd" id="2_vduoj"]
 [ext_resource type="Texture2D" uid="uid://cb4tg4s3yfjx6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_right.png" id="3_hp78i"]
-[ext_resource type="PackedScene" uid="uid://bivlb1hvibe2i" path="res://Prefabs/Dashboard/time.tscn" id="4_hp78i"]
 
-[node name="BaseTemplateScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_sk5pj")]
+[node name="DashboardScreen" instance=ExtResource("1_sk5pj")]
+script = ExtResource("2_vduoj")
 animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
-first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/FilterPanel/HBoxContainer/PreviousDate")
 
 [node name="AutoMarginContainer" parent="ScrollContainer/CenterContainer" index="0"]
 custom_minimum_size = Vector2(1500.8, 0)
@@ -17,7 +17,8 @@ min_width = 800
 max_width = 3400
 
 [node name="MainContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer" index="0" node_paths=PackedStringArray("elements")]
-elements = [NodePath("FilterPanel")]
+duration = 0.25
+elements = [NodePath("FilterPanel"), NodePath("ContentContainer")]
 
 [node name="FilterPanel" type="PanelContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="0"]
 z_index = 1
@@ -50,81 +51,6 @@ size_flags_vertical = 3
 [node name="TimesContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Time" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="0" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time13" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="1" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time14" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="2" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time15" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="3" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time16" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="4" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time17" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="5" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time18" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="6" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time19" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="7" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time20" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="8" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time21" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="9" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time22" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="10" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time23" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="11" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time24" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="12" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time25" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="13" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time2" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="14" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time3" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="15" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time4" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="16" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time5" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="17" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time6" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="18" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time7" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="19" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time8" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="20" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time9" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="21" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time10" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="22" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time11" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="23" instance=ExtResource("4_hp78i")]
-layout_mode = 2
-
-[node name="Time12" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/TimesContainer" index="24" instance=ExtResource("4_hp78i")]
-layout_mode = 2
 
 [node name="SideContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer" index="1"]
 layout_mode = 2

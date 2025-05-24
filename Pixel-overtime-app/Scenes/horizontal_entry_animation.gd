@@ -60,6 +60,8 @@ func _on_tween_finished(newControl: Control) -> void:
 	emit_signal("animation_finished")
 
 func _ready() -> void:
+	self.force_update_transform()
+
 	for el in elements:
 		elements_modulate[el] = el.modulate
 		el.modulate = Color.TRANSPARENT

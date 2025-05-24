@@ -6,6 +6,7 @@ var FormField = preload("res://Prefabs/FormField/form_field.gd")
 @export_group("Screens")
 @export_file("*.tscn") var register: String
 @export_file("*.tscn") var settings: String
+@export_file("*.tscn") var dashboard: String
 
 @onready var webservice:= $/root/WebService as WebService
 
@@ -25,6 +26,8 @@ func _on_log_in_button_pressed() -> void:
 			if(field.get_script() == FormField):
 				field.display_error(errors)
 	
-	if(errors.has("") and errors[""] != ""):
-		%GlobalErrorLabel.text = errors[""]
-		%GlobalErrorLabel.visible = true
+		if(errors.has("") and errors[""] != ""):
+			%GlobalErrorLabel.text = errors[""]
+			%GlobalErrorLabel.visible = true
+	else:
+		self._goto_screen_with_animation(dashboard)
