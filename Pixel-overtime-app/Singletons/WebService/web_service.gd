@@ -60,6 +60,7 @@ const USER_SAVE_FILE:= "user://user.res";
 var user: User
 
 signal api_error(title: String, message: String)
+signal user_logout()
 
 func _ready() -> void:
 	_load_user()
@@ -224,7 +225,9 @@ func get_me_infos():
 	return user
 
 func logout():
-	pass
+	user = User.new() # Reset user info to force logout and delete api tokens
+	self._save_user()
+	emit_signal("user_logout")
 
 #TODO: add filters and pagination
 func get_times_list():

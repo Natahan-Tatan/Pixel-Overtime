@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqpseoq3i7cs4"]
+[gd_scene load_steps=8 format=3 uid="uid://dqpseoq3i7cs4"]
 
 [ext_resource type="PackedScene" uid="uid://b182o6a4m836y" path="res://Scenes/base_template_screen.tscn" id="1_sk5pj"]
 [ext_resource type="Script" uid="uid://dbdev05si0lim" path="res://Scenes/Dashboard/filter_panel.gd" id="2_0b8t0"]
 [ext_resource type="Texture2D" uid="uid://ci233jqwsqnh6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_left.png" id="2_ia7dg"]
 [ext_resource type="Script" uid="uid://b3mbtqaduuuyy" path="res://Scenes/Dashboard/dashboard_screen.gd" id="2_vduoj"]
 [ext_resource type="Texture2D" uid="uid://cb4tg4s3yfjx6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_right.png" id="3_hp78i"]
+[ext_resource type="Texture2D" uid="uid://dxettid4krtrd" path="res://FlovertimeTheme/Widgets/OptionButton/option_arrow_down.png" id="6_vduoj"]
+[ext_resource type="Script" uid="uid://b8fwfri6bk5j3" path="res://Scenes/Dashboard/user_menu_button.gd" id="7_32m3q"]
 
-[node name="DashboardScreen" instance=ExtResource("1_sk5pj")]
+[node name="DashboardScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_sk5pj")]
 script = ExtResource("2_vduoj")
+login = "uid://c0iymvko0c71q"
 animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
+first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/SideContainer/UserMenuButton")
 
 [node name="AutoMarginContainer" parent="ScrollContainer/CenterContainer" index="0"]
 custom_minimum_size = Vector2(1500.8, 0)
@@ -55,3 +59,22 @@ size_flags_horizontal = 3
 [node name="SideContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer" index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="UserMenuButton" type="MenuButton" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/SideContainer" index="0"]
+layout_mode = 2
+focus_mode = 2
+theme_type_variation = &"MenuButton_Blue"
+text = " 👱 Natahan Joah Charly Thomas Test"
+icon = ExtResource("6_vduoj")
+flat = false
+text_overrun_behavior = 3
+clip_text = true
+icon_alignment = 2
+item_count = 3
+popup/item_0/text = "🪪 My profile"
+popup/item_0/id = 0
+popup/item_1/id = 1
+popup/item_1/separator = true
+popup/item_2/text = "🚪 Log out"
+popup/item_2/id = 2
+script = ExtResource("7_32m3q")
