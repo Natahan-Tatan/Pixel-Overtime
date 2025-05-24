@@ -48,6 +48,9 @@ field_name = "password"
 label = "Password"
 secret = true
 
+[node name="LineEdit" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/PasswordField" index="0"]
+placeholder_text = "Password"
+
 [node name="MiddleContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="3"]
 layout_mode = 2
 
@@ -93,8 +96,11 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 text = "Register"
 
+[connection signal="text_submitted" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailField/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/PasswordField/LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/MiddleContainer/HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/LogInButton" to="." method="_on_log_in_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ButtonsContainer/RegisterButton" to="." method="_on_register_button_pressed"]
 
 [editable path="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/EmailField"]
+[editable path="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/PasswordField"]

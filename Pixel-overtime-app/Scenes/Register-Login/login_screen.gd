@@ -31,3 +31,8 @@ func _on_log_in_button_pressed() -> void:
 			%GlobalErrorLabel.visible = true
 	else:
 		self._goto_screen_with_animation(dashboard)
+
+
+func _on_line_edit_text_submitted(new_text:String) -> void:
+	if(!new_text.is_empty()):
+		self._on_log_in_button_pressed()
