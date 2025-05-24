@@ -125,6 +125,8 @@ var app = builder.Build();
 
 app.UseW3CLogging();
 
+app.UseCors(opt => opt.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
+
 app.MapCustomIdentityApi<pixel_overtime_api.Database.Models.User>();
 
 app.UseAuthorization();
