@@ -11,7 +11,7 @@ var FormField = preload("res://Prefabs/FormField/form_field.gd")
 @onready var webservice:= $/root/WebService as WebService
 
 func _ready() -> void:
-	if(webservice.user.remember):
+	if(webservice.user.remember and !webservice.user.id.is_empty()):
 		get_tree().change_scene_to_file(dashboard)
 
 func _on_register_button_pressed() -> void:
