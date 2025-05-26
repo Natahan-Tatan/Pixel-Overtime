@@ -196,12 +196,14 @@ func login(email: String, password: String, remember:= false) -> Dictionary:
 	[b]Name:[/b] %s
 	[b]Email confirmed:[/b] %s
 	[b]Account created:[/b] %s
+	Remember: %s
 	""" % [
 		user.id,
 		user.email,
 		user.name,
 		str(user.email_confirmed),
-		Time.get_datetime_string_from_datetime_dict(user.account_created_date, true)
+		Time.get_datetime_string_from_datetime_dict(user.account_created_date, true),
+		str(remember)
 	])
 
 	return {}

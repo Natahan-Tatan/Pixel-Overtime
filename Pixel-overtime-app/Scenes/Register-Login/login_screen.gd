@@ -12,6 +12,7 @@ var FormField = preload("res://Prefabs/FormField/form_field.gd")
 
 func _ready() -> void:
 	if(webservice.user.remember and !webservice.user.id.is_empty()):
+		webservice.get_me_infos()
 		get_tree().change_scene_to_file(dashboard)
 
 func _on_register_button_pressed() -> void:
