@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://6s82ayjfyggk"]
+[gd_scene load_steps=10 format=3 uid="uid://6s82ayjfyggk"]
 
 [ext_resource type="Script" uid="uid://dnl3xeutxgkqf" path="res://Singletons/WebService/web_service.gd" id="1_tua53"]
 [ext_resource type="Script" uid="uid://btwuf7hhq0ipp" path="res://Singletons/WebService/route.gd" id="2_emypa"]
@@ -39,6 +39,12 @@ method = 8
 route = "/me"
 metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
 
+[sub_resource type="Resource" id="Resource_atrst"]
+script = ExtResource("2_emypa")
+method = 0
+route = "/Time"
+metadata/_custom_type_script = "uid://btwuf7hhq0ipp"
+
 [node name="WebService" type="Node"]
 script = ExtResource("1_tua53")
 route_register = SubResource("Resource_m2iw7")
@@ -47,5 +53,6 @@ route_refresh = SubResource("Resource_hei7v")
 route_logout = SubResource("Resource_emypa")
 route_get_user_infos = SubResource("Resource_q6tvd")
 route_set_user_infos = SubResource("Resource_oeuvy")
+route_get_times_list = SubResource("Resource_atrst")
 
 [connection signal="api_error" from="." to="." method="_on_api_error"]

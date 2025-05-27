@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqpseoq3i7cs4"]
+[gd_scene load_steps=9 format=3 uid="uid://dqpseoq3i7cs4"]
 
 [ext_resource type="PackedScene" uid="uid://b182o6a4m836y" path="res://Scenes/base_template_screen.tscn" id="1_sk5pj"]
-[ext_resource type="Script" path="res://Scenes/Dashboard/filter_panel.gd" id="2_0b8t0"]
+[ext_resource type="Script" uid="uid://dbdev05si0lim" path="res://Scenes/Dashboard/filter_panel.gd" id="2_0b8t0"]
 [ext_resource type="Texture2D" uid="uid://ci233jqwsqnh6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_left.png" id="2_ia7dg"]
 [ext_resource type="Script" uid="uid://b3mbtqaduuuyy" path="res://Scenes/Dashboard/dashboard_screen.gd" id="2_vduoj"]
 [ext_resource type="Texture2D" uid="uid://cb4tg4s3yfjx6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_right.png" id="3_hp78i"]
+[ext_resource type="Script" uid="uid://ybsvo27bo8s4" path="res://Scenes/Dashboard/times_container.gd" id="6_1421f"]
 [ext_resource type="Texture2D" uid="uid://dxettid4krtrd" path="res://FlovertimeTheme/Widgets/OptionButton/option_arrow_down.png" id="6_vduoj"]
 [ext_resource type="Script" path="res://Scenes/Dashboard/user_menu_button.gd" id="7_32m3q"]
 
@@ -55,6 +56,7 @@ size_flags_vertical = 3
 [node name="TimesContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("6_1421f")
 
 [node name="SideContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer" index="1"]
 layout_mode = 2
