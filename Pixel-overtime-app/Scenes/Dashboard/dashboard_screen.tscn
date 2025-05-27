@@ -11,6 +11,7 @@
 
 [node name="DashboardScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_sk5pj")]
 script = ExtResource("2_vduoj")
+small_width = 1200
 login = "uid://c0iymvko0c71q"
 animated_container = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer")
 first_focused_input = NodePath("ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer/SideContainer/UserMenuButton")
@@ -49,9 +50,10 @@ layout_mode = 2
 texture_normal = ExtResource("3_hp78i")
 stretch_mode = 3
 
-[node name="ContentContainer" type="HBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="1"]
+[node name="ContentContainer" type="BoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer" index="1"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 25
 
 [node name="TimesContainer" type="VBoxContainer" parent="ScrollContainer/CenterContainer/AutoMarginContainer/MainContainer/ContentContainer" index="0"]
 layout_mode = 2

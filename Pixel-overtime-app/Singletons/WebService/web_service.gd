@@ -125,8 +125,8 @@ func _do_request(caller: StringName, route: ApiRoute, query_string: Dictionary, 
 				if(use_auth and reauth_on_401 and client.get_response_code() == 401):
 					var refreshResponse = await self._do_request(caller, route_refresh, {}, JSON.stringify({"refreshToken": user.refresh}), false, false)
 
-					if(refreshResponse.size() > 0):
-						var dict = JSON.parse_string(refreshResponse.get_string_from_utf8())
+					if(refreshResponse.data.size() > 0):
+						var dict = JSON.parse_string(refreshResponse.data.get_string_from_utf8())
 						user.bearer = dict["accessToken"]
 						user.refresh = dict["refreshToken"]
 						self._save_user()
