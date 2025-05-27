@@ -209,7 +209,11 @@ func login(email: String, password: String, remember:= false) -> Dictionary:
 	return {}
 
 func get_me_infos():
-	var response = await self._do_request("GetMeInfos", route_get_user_infos, {}, "", true, true)
+	var response:= await self._do_request("GetMeInfos", route_get_user_infos, {}, "", true, true)
+
+	if(response.internal_error):
+		return null
+
 	var dict = JSON.parse_string(response.data.get_string_from_utf8())
 	
 	user.id = dict["id"]

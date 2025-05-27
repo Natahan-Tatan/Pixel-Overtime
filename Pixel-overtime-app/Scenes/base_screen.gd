@@ -27,5 +27,5 @@ func _goto_screen_with_animation(scene_path) -> void:
 		self.queue_free()
 
 func _tweak_popup_viewport(node: Node) -> void:
-	if(node is Window):
+	if(node is Viewport):
 		node.canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST

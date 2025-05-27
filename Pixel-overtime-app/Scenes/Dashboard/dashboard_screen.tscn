@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dqpseoq3i7cs4"]
 
 [ext_resource type="PackedScene" uid="uid://b182o6a4m836y" path="res://Scenes/base_template_screen.tscn" id="1_sk5pj"]
-[ext_resource type="Script" uid="uid://dbdev05si0lim" path="res://Scenes/Dashboard/filter_panel.gd" id="2_0b8t0"]
+[ext_resource type="Script" path="res://Scenes/Dashboard/filter_panel.gd" id="2_0b8t0"]
 [ext_resource type="Texture2D" uid="uid://ci233jqwsqnh6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_left.png" id="2_ia7dg"]
 [ext_resource type="Script" uid="uid://b3mbtqaduuuyy" path="res://Scenes/Dashboard/dashboard_screen.gd" id="2_vduoj"]
 [ext_resource type="Texture2D" uid="uid://cb4tg4s3yfjx6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_right.png" id="3_hp78i"]
 [ext_resource type="Texture2D" uid="uid://dxettid4krtrd" path="res://FlovertimeTheme/Widgets/OptionButton/option_arrow_down.png" id="6_vduoj"]
-[ext_resource type="Script" uid="uid://b8fwfri6bk5j3" path="res://Scenes/Dashboard/user_menu_button.gd" id="7_32m3q"]
+[ext_resource type="Script" path="res://Scenes/Dashboard/user_menu_button.gd" id="7_32m3q"]
 
 [node name="DashboardScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_sk5pj")]
 script = ExtResource("2_vduoj")

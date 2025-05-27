@@ -8,7 +8,8 @@ var WebService = preload("res://Singletons/WebService/web_service.gd")
 @export_file("*.tscn") var login: String
 
 func _ready() -> void:
-    webservice.connect("user_logout",on_user_logout)
+	super._ready()
+	webservice.connect("user_logout",on_user_logout)
 
 func on_user_logout():
-    self._goto_screen_with_animation(login)
+	self._goto_screen_with_animation(login)

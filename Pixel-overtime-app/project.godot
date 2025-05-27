@@ -51,7 +51,6 @@ project/assembly_name="pixel-overtime-app"
 
 fonts/dynamic_fonts/use_oversampling=false
 theme/custom="uid://6xodd4q0doio"
-theme/default_font_antialiasing=0
 theme/default_font_subpixel_positioning=0
 
 [physics]
