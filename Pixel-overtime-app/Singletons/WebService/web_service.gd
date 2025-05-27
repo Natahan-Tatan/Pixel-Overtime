@@ -234,13 +234,12 @@ func logout():
 	emit_signal("user_logout")
 
 #TODO: add filters and pagination
-func get_times_list():
+func get_times_list() -> Array:
 	var response:= await self._do_request("GetTimeList", route_get_times_list, {}, "", true, true)
 	if(response.internal_error):
-		return null
+		return []
 		
-	var dict = JSON.parse_string(response.data.get_string_from_utf8())
-	print("COUCOU")
+	return JSON.parse_string(response.data.get_string_from_utf8())
 
 func _on_api_error(title:String, message:String) -> void:
 	printerr("[API Error] %s\n\t%s" % [title, message])

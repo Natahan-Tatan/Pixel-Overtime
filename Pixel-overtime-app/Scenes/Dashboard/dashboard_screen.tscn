@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cb4tg4s3yfjx6" path="res://FlovertimeTheme/Widgets/Arrows/arrow_right.png" id="3_hp78i"]
 [ext_resource type="Script" uid="uid://ybsvo27bo8s4" path="res://Scenes/Dashboard/times_container.gd" id="6_1421f"]
 [ext_resource type="Texture2D" uid="uid://dxettid4krtrd" path="res://FlovertimeTheme/Widgets/OptionButton/option_arrow_down.png" id="6_vduoj"]
-[ext_resource type="Script" path="res://Scenes/Dashboard/user_menu_button.gd" id="7_32m3q"]
+[ext_resource type="Script" uid="uid://b8fwfri6bk5j3" path="res://Scenes/Dashboard/user_menu_button.gd" id="7_32m3q"]
 
 [node name="DashboardScreen" node_paths=PackedStringArray("first_focused_input") instance=ExtResource("1_sk5pj")]
 script = ExtResource("2_vduoj")
